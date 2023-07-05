@@ -4,11 +4,6 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
-chrome_options = Options()
-chrome_options.add_argument("--window-size=1920,800")
-chrome_options.add_argument("--headless")
-driver_chrome = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-driver_chrome.implicitly_wait(10)
 
 # зайти на страницу
 # вбить юзернейм (standard_user)
@@ -36,6 +31,16 @@ def click_button(driver, locator):
     button.click()
 
 
+def create_driver():
+    chrome_options = Options()
+    chrome_options.add_argument("--window-size=1920,800")
+    chrome_options.add_argument("--headless")
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
+    driver.implicitly_wait(10)
+    return driver
+
+
+driver_chrome = create_driver()
 # 1
 open_page(driver_chrome, URL)
 # 2
