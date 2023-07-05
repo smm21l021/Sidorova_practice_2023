@@ -3,7 +3,7 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
-driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+driver_chrome = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
 # зайти на страницу
 # вбить юзернейм (standard_user)
@@ -16,16 +16,27 @@ URL = 'https://www.saucedemo.com/'
 LOGIN = 'standard_user'
 PASSWORD = 'secret_sauce'
 
-# 1
-driver.get(URL)
 
+def open_page(driver, url):
+    driver.get(url)
+
+
+def input_data(driver, locator, data):
+    input_field = driver.find_element(By.ID, locator)
+    input_field.send_keys(data)
+
+
+def click_button(driver, locator):
+    button = driver.find_element(By.ID, locator)
+    button.click()
+
+
+# 1
+open_page(driver_chrome, URL)
 # 2
-login_input = driver.find_element(By.ID, 'user-name')
-login_input.send_keys(LOGIN)
+input_data(driver_chrome, 'user-name', LOGIN)
 # 3
-password_input = driver.find_element(By.ID, 'password')
-password_input.send_keys(PASSWORD)
+input_data(driver_chrome, 'password', PASSWORD)
 # 4
-login_button = driver.find_element(By.ID, 'login-button')
-login_button.click()
+click_button(driver_chrome, 'login-button')
 # 5
