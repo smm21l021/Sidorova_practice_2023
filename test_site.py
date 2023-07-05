@@ -39,4 +39,5 @@ input_data(driver_chrome, 'user-name', LOGIN)
 input_data(driver_chrome, 'password', PASSWORD)
 # 4
 click_button(driver_chrome, 'login-button')
+driver_chrome.quit()
 # 5
